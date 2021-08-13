@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\ActionOfThirdParties as ModelActionOfThirdParties;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ActionOfThirdParties as RequestsActionOfThirdParties;
 use App\Http\Services\StoreData;
 use Illuminate\Http\Request;
 
@@ -25,14 +26,16 @@ class ActionOfThirdParties extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ActionOfThirdParties $request)
+    public function store(RequestsActionOfThirdParties $request)
     {
         $table =  new ModelActionOfThirdParties();
         $insert = new storeData($request,$table);
-        if($insert->consult_exe){
+        if($insert){
             return response()->json([
                 'resp'=>true,
                 'message'=>'Insertado correctamente',
+                $insert
+                
             ],201);
         }
     }
